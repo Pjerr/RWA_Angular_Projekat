@@ -1,0 +1,8 @@
+<h1 class="display-1">Pera's record corner</h1>
+<div class="container">
+    <div class="row">
+      <div *ngFor="let record of records | async" class="col">
+        <app-record-detail [record]="record"></app-record-detail>
+       </div>
+    </div>
+  </div>

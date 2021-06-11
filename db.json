@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "id": 1,
+      "title": "Nevermind",
+      "yearOfRelease": 1991,
+      "cover": "https://images-na.ssl-images-amazon.com/images/I/71DQrKpImPL._SL1400_.jpg",
+      "author":"Nirvana",
+      "votes":0
+    },
+    {
+      "id": 2,
+      "title": "Superunknown",
+      "yearOfRelease": 1994,
+      "cover": "https://upload.wikimedia.org/wikipedia/en/3/3a/Superunknown.jpg",
+      "author": "Soundgarden",
+      "votes":0
+    },
+    {
+      "id": 3,
+      "title": "Ten",
+      "yearOfRelease": 1991,
+      "cover": "https://upload.wikimedia.org/wikipedia/en/2/2d/PearlJam-Ten2.jpg",
+      "author": "Pearl Jam",
+      "votes":0
+    },
+    {
+      "id": 4,
+      "title": "Dirt",
+      "yearOfRelease": 1992,
+      "cover": "https://img.discogs.com/YnmQmA48ST3uW-4bpIxOeMknVNk=/fit-in/500x500/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-14587443-1577665758-3652.jpeg.jpg",
+      "author":"Alice in Chains",
+      "votes":0
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<div class="card" *ngIf="record">
+    <h2>{{record.title}}</h2>
+    <img [src]="record.cover" class="img-thumbnail rounded mx-auto d-block img" alt="slika">
+    <h4>{{record.author}} {{record.yearOfRelease}}</h4>
+    <p>Votes: {{record.votes}}</p>
+</div>
