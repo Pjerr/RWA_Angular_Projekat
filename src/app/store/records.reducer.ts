@@ -1,29 +1,29 @@
+import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import { Record } from '../models/record';
 import * as RecordActions from './records.actions';
 
-export interface RecordState {
+export interface RecordState extends EntityState<Record> {
   selectedRecordID: number;
-  allRecords: ReadonlyArray<Record>;
 }
 
-export const initialState: RecordState = {
+const adapter = createEntityAdapter<Record>();
+
+const initialState: RecordState = adapter.getInitialState({
   selectedRecordID: -1,
-  allRecords: [],
-};
+});
 
 export const recordReducer = createReducer(
   initialState,
-  on(RecordActions.vote, (state, { recordID, voteOutcome }) => ({
-    ...state,
-    allRecords: state.allRecords?.map((record) =>
-      record.id === recordID ? { ...record, votes: voteOutcome } : record
-    ),
-  })),
-  on(RecordActions.loadRecords, (state, { records }) => ({
-    ...state,
-    allRecords: records,
-  })),
+  on(RecordActions.vote, (state, { recordID, voteOutcome }) => {
+    const targetRecord = state.entities[recordID];
+    return targetRecord
+      ? adapter.setOne({ ...targetRecord, votes: voteOutcome }, state)
+      : state;
+  }),
+  on(RecordActions.loadRecordsSuccess, (state, { records }) =>
+    adapter.setAll(records, state)
+  ),
   on(RecordActions.selectRecord, (state, { recordID }) => ({
     ...state,
     selectedRecordID: recordID,

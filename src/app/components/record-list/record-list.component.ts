@@ -13,22 +13,16 @@ import * as RecordActions from '../../store/records.actions';
   styleUrls: ['./record-list.component.css'],
 })
 export class RecordListComponent implements OnInit {
-  constructor(
-    private store: Store<AppState>,
-    private recordService: RecordService
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   records: Observable<readonly Record[]> = of([]);
   ngOnInit(): void {
-    //ovako ne, ispraviti kasnije
-    this.recordService.getAllRecords().subscribe((records) => {
-      this.store.dispatch(RecordActions.loadRecords({ records: records }));
-    });
+    this.store.dispatch(RecordActions.loadRecords());
     this.records = this.store.select(selectAllRecords);
   }
 
   selectRecord(record: Record) {
-    if (record) RecordActions.selectRecord({ recordID: record.id });
+    this.store.dispatch(RecordActions.selectRecord({ recordID: record.id }));
   }
 
   voteForRecord(recordVote: RecordVote) {

@@ -11,6 +11,8 @@ import { recordReducer } from './store/records.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ChatRoomComponent } from './components/chat-room/chat-room.component';
+import { EffectsModule } from '@ngrx/effects';
+import { RecordsEffect } from './store/records.effects';
 
 @NgModule({
   declarations: [AppComponent, RecordDetailComponent, RecordListComponent, NavBarComponent, ChatRoomComponent],
@@ -21,7 +23,8 @@ import { ChatRoomComponent } from './components/chat-room/chat-room.component';
     StoreModule.forRoot({ records: recordReducer }),
     StoreDevtoolsModule.instrument({
       maxAge:25
-    })
+    }),
+    EffectsModule.forRoot([RecordsEffect])
   ],
   providers: [],
   bootstrap: [AppComponent],

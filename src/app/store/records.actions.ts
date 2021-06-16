@@ -9,13 +9,16 @@ export const vote = createAction(
   }>()
 );
 
-export const loadRecords = createAction(
+export const loadRecordsSuccess = createAction(
   'Load All Records',
   props<{
     records: Record[];
   }>()
 );
 
+export const loadRecords = createAction(
+  'Load Records'
+)
 export const selectRecord = createAction(
   'Select Record',
   props<{
