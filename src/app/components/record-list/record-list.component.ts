@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Record } from 'src/app/models/record';
+import { RecordVote } from 'src/app/models/recordVote';
 import { RecordService } from 'src/app/services/record.service';
 import { AppState } from 'src/app/store/app.state';
-import { loadRecords } from 'src/app/store/records.actions';
-
+import { selectAllRecords } from 'src/app/store/records.selectors';
+import * as RecordActions from '../../store/records.actions';
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.component.html',
@@ -19,11 +20,24 @@ export class RecordListComponent implements OnInit {
 
   records: Observable<readonly Record[]> = of([]);
   ngOnInit(): void {
-
     //ovako ne, ispraviti kasnije
-    this.recordService.getAllRecords().subscribe((records)=>{
-      this.store.dispatch(loadRecords({records:records}));
-    })
-    this.records = this.store.select((state) => state.records.allRecords);
+    this.recordService.getAllRecords().subscribe((records) => {
+      this.store.dispatch(RecordActions.loadRecords({ records: records }));
+    });
+    this.records = this.store.select(selectAllRecords);
+  }
+
+  selectRecord(record: Record) {
+    if (record) RecordActions.selectRecord({ recordID: record.id });
+  }
+
+  voteForRecord(recordVote: RecordVote) {
+    console.log(recordVote);
+    this.store.dispatch(
+      RecordActions.vote({
+        recordID: recordVote.id,
+        voteOutcome: recordVote.votes,
+      })
+    );
   }
 }

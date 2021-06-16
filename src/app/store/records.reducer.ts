@@ -1,6 +1,7 @@
 import { createReducer, on } from '@ngrx/store';
 import { Record } from '../models/record';
 import * as RecordActions from './records.actions';
+
 export interface RecordState {
   selectedRecordID: number;
   allRecords: ReadonlyArray<Record>;
@@ -25,6 +26,6 @@ export const recordReducer = createReducer(
   })),
   on(RecordActions.selectRecord, (state, { recordID }) => ({
     ...state,
-    selectedRecordID:recordID
+    selectedRecordID: recordID,
   }))
 );
