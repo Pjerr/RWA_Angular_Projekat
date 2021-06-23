@@ -27,7 +27,7 @@ export const selectOneRecordID = createSelector(
 );
 
 export const selectOneRecord = createSelector(
-  selectAllRecordsAsDict,
+  selectAllRecords,
   selectOneRecordID,
   (allRecords, recordID) => allRecords[recordID] ?? null
 );

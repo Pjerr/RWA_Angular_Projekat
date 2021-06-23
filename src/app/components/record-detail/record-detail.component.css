@@ -28,3 +28,9 @@ p,h2,h3,h4{
 .fa-angle-down:hover{
     color: red;
 }
+
+h2:hover{
+    cursor: pointer;
+    color: #19448a;
+    text-decoration: underline;
+}

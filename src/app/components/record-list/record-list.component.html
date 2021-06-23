@@ -1,8 +1,11 @@
 <h1 class="display-1">Pera's record corner</h1>
-<div class="container">
+<div class="container-fluid">
     <div class="row">
       <div *ngFor="let record of records | async" class="col" (click)="selectRecord(record)">
         <app-record-detail [record]="record" (setVotes)="voteForRecord($event)"></app-record-detail>
        </div>
+    </div>
+    <div *ngIf="(selectedRecord | async) as selectedRecord">
+      {{selectedRecord.title}}
     </div>
   </div>

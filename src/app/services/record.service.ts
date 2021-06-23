@@ -13,4 +13,8 @@ export class RecordService {
   getAllRecords(){
     return this.httpClient.get<Record[]>(`${environment.apiURL}records`);
   }
+
+  voteForRecord(record:any){
+    return this.httpClient.patch<Record>(`${environment.apiURL}records/${record.id}`,{id:record.id, votes:record.votes});
+  }
 }

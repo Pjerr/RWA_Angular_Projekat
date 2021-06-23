@@ -21,6 +21,9 @@ export const recordReducer = createReducer(
       ? adapter.setOne({ ...targetRecord, votes: voteOutcome }, state)
       : state;
   }),
+  on(RecordActions.voteForRecordSuccess, (state, record)=>{
+    return adapter.setOne(record, state);
+  }),
   on(RecordActions.loadRecordsSuccess, (state, { records }) =>
     adapter.setAll(records, state)
   ),

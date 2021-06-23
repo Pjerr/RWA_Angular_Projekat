@@ -23,4 +23,16 @@ export class RecordsEffect {
       )
     )
   );
+
+  voteEffect$ = createEffect(()=>    
+  this.actions$.pipe(
+    ofType(RecordActions.vote),
+    mergeMap((action) =>
+      this.recordService.voteForRecord({id:action.recordID, votes:action.voteOutcome}).pipe(
+        map((record) => RecordActions.voteForRecordSuccess( record )),
+        catchError(() => of({ type: 'load error' }))
+      )
+    )
+  )
+);
 }

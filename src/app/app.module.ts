@@ -8,23 +8,26 @@ import { RecordListComponent } from './components/record-list/record-list.compon
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { recordReducer } from './store/records.reducer';
+import {songReducer} from "./store/songs.reducer"
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 import { ChatRoomComponent } from './components/chat-room/chat-room.component';
 import { EffectsModule } from '@ngrx/effects';
 import { RecordsEffect } from './store/records.effects';
+import { RecordSongsComponent } from './components/record-songs/record-songs.component';
+import { SongsEffect } from './store/songs.effects';
 
 @NgModule({
-  declarations: [AppComponent, RecordDetailComponent, RecordListComponent, NavBarComponent, ChatRoomComponent],
+  declarations: [AppComponent, RecordDetailComponent, RecordListComponent, NavBarComponent, ChatRoomComponent, RecordSongsComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    StoreModule.forRoot({ records: recordReducer }),
+    StoreModule.forRoot({ records: recordReducer, songs:songReducer }),
     StoreDevtoolsModule.instrument({
       maxAge:25
     }),
-    EffectsModule.forRoot([RecordsEffect])
+    EffectsModule.forRoot([RecordsEffect, SongsEffect])
   ],
   providers: [],
   bootstrap: [AppComponent],
