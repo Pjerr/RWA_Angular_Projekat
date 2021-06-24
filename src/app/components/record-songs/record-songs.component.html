@@ -1,8 +1,24 @@
 <div class="container">
     <div class="row" *ngIf="(selectedRecord) as record">
         <h3>{{selectedRecord.title}}</h3>
-        <div *ngFor="let song of songs |async" class="song">
+        <div *ngFor="let song of songs |async" class="song" (click)="selectSong(song)">
             <p>{{song.name}}</p>
         </div>
     </div>
+    <div class="player row mt-3">
+        <div class="col" [hidden]="!songSelected">
+            <button mat-mini-fab [disabled]="isFirstPlaying()" (click)="previous()">
+              <mat-icon mat-list-icon>skip_previous</mat-icon>
+            </button>
+            <button mat-mini-fab (click)="play()">
+              <mat-icon mat-list-icon>play_circle_filled</mat-icon>
+            </button>
+            <button mat-mini-fab (click)="pause()">
+              <mat-icon mat-list-icon>pause</mat-icon>
+            </button>
+            <button  mat-mini-fab [disabled]="isLastPlaying()" (click)="next()">
+              <mat-icon mat-list-icon>skip_next</mat-icon>
+            </button>
+        </div>
+      </div>
 </div>

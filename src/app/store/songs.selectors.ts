@@ -5,8 +5,7 @@ import { SongState } from './songs.reducer';
 
 export const selectSongsFeature = createSelector(
   (state: AppState) => state.songs,
-  (songs) => songs,
-  (recordID) => recordID
+  (songs) => songs
 );
 
 export const selectAllSongs = createSelector(
@@ -19,20 +18,13 @@ export const selectAllSongs = createSelector(
   }
 );
 
-// export const selectRecordID = createSelector(
-//   selectSongsFeature,
-//   (state:SongState) => state.selectedRecordID
-// );
+export const selectSongID = createSelector(
+  selectSongsFeature,
+  (state:SongState) => state.selectedSongID
+);
 
-// export const selectSongs = createSelector(
-//     selectAllSongs,
-//     selectRecordID,
-//     (allSongs, recordID) => {
-//         let requestedSongs:Song[] = [];
-//         allSongs.forEach(song => {
-//             if(song.recordID == recordID) requestedSongs.push(song);
-//         });
-//         console.log(requestedSongs);
-//         return requestedSongs;
-//     }
-// )
+export const selectSong = createSelector(
+  selectAllSongs,
+  selectSongID,
+  (allSongs, songID)=> allSongs[songID] ?? null
+)

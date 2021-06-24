@@ -5,9 +5,9 @@ import { Observable, of } from 'rxjs';
 import { Record } from 'src/app/models/record';
 import { RecordVote } from 'src/app/models/recordVote';
 import { AppState } from 'src/app/store/app.state';
-import { selectAllRecords, selectOneRecord } from 'src/app/store/records.selectors';
+import { selectAllRecords } from 'src/app/store/records.selectors';
 import * as RecordActions from '../../store/records.actions';
-import * as SongActions from '../../store/songs.actions'
+
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.component.html',

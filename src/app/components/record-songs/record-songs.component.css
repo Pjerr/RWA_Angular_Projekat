@@ -7,3 +7,12 @@
 h3{
     text-align: center;
 }
+
+.player{
+    text-align: center;
+}
+
+.song:hover{
+    cursor: pointer;
+    background-color: antiquewhite;
+}

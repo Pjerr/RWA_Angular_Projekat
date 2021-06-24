@@ -42,4 +42,31 @@ export class RecordSongsComponent implements OnInit {
 
     this.songs = this.store.select(SongSelectors.selectAllSongs);
   }
+
+  songSelected:boolean = false;
+  selectSong(song:Song){
+    this.store.dispatch(SongActions.selectSong({songID:song.id}));
+    this.songSelected = true;
+    //stavi mu selected klasu npr?
+  }
+
+  isFirstPlaying(){
+    return false;
+  }
+  isLastPlaying(){
+    return true;
+  }
+
+  previous(){
+
+  }
+  next(){
+
+  }
+  pause(){
+
+  }
+  play(){
+
+  }
 }

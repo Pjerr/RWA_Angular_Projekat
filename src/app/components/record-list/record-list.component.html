@@ -5,7 +5,4 @@
         <app-record-detail [record]="record" (setVotes)="voteForRecord($event)"></app-record-detail>
        </div>
     </div>
-    <div *ngIf="(selectedRecord | async) as selectedRecord">
-      {{selectedRecord.title}}
-    </div>
   </div>

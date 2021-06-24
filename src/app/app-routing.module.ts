@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChatRoomComponent } from './components/chat-room/chat-room.component';
+import { AboutComponent } from './components/about/about.component';
+import { ErrorPageComponent } from './components/error-page/error-page.component';
 import { RecordListComponent } from './components/record-list/record-list.component';
 import { RecordSongsComponent } from './components/record-songs/record-songs.component';
 
@@ -14,8 +15,12 @@ const routes: Routes = [
     component:RecordSongsComponent
   },
   {
-    path:'chat',
-    component:ChatRoomComponent
+    path:'about',
+    component:AboutComponent
+  },
+  {
+    path:'**',
+    component: ErrorPageComponent
   }
 ];
 

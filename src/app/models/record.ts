@@ -5,5 +5,6 @@ export interface Record {
   yearOfRelease:number,
   votes:number,
   author: string,
-  cover:string
+  cover:string,
+  favourite:string
 }

@@ -13,7 +13,7 @@ p,h2,h3,h4{
     height: 300px;
 }
 
-.fas{
+.fas, .far{
     font-size: 20px;
     padding-left: 5px;
 }
@@ -29,8 +29,23 @@ p,h2,h3,h4{
     color: red;
 }
 
-h2:hover{
+.title:hover{
     cursor: pointer;
     color: #19448a;
     text-decoration: underline;
+}
+
+.far:hover{
+    cursor:pointer;
+}
+
+.fa-heart{
+    color: red;
+}
+
+.praznoSrce{
+    color: black;
+}
+.praznoSrce:hover{
+    color: red;
 }
