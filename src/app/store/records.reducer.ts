@@ -30,5 +30,9 @@ export const recordReducer = createReducer(
   on(RecordActions.selectRecord, (state, { recordID }) => ({
     ...state,
     selectedRecordID: recordID,
-  }))
+  })),
+  on(RecordActions.favourite, (state, {recordID, favouriteState})=>{
+    const targetRecord = state.entities[recordID];
+    return targetRecord ? adapter.setOne({...targetRecord, favourite: favouriteState}, state) : state;
+  })
 );

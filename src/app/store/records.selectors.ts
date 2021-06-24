@@ -31,3 +31,16 @@ export const selectOneRecord = createSelector(
   selectOneRecordID,
   (allRecords, recordID) => allRecords[recordID] ?? null
 );
+
+export const sortByFavourites = createSelector(
+  selectAllRecords,
+  (allRecords)=> {
+    let favouritesArray= [];
+    let nonFavouritesArray= [];
+    let arrayForDisplay = [];
+    favouritesArray = allRecords.filter((record)=> record.favourite === 'yes');
+    nonFavouritesArray = allRecords.filter((record)=> record.favourite === 'no');
+    arrayForDisplay = [...favouritesArray, ...nonFavouritesArray];
+    return arrayForDisplay;
+  }
+)

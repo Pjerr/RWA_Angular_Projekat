@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Record } from '../models/record';
+import { RecordFavourite } from '../models/recordFavourite';
+import { RecordVote } from '../models/recordVote';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +16,11 @@ export class RecordService {
     return this.httpClient.get<Record[]>(`${environment.apiURL}records`);
   }
 
-  voteForRecord(record:any){
-    return this.httpClient.patch<Record>(`${environment.apiURL}records/${record.id}`,{id:record.id, votes:record.votes});
+  voteForRecord(recordVote:RecordVote){
+    return this.httpClient.patch<Record>(`${environment.apiURL}records/${recordVote.id}`,{id:recordVote.id, votes:recordVote.votes});
+  }
+
+  changeRecordFavourite(recordFavourite:RecordFavourite){
+    return this.httpClient.patch<Record>(`${environment.apiURL}records/${recordFavourite.id}`,{id:recordFavourite.id, favourite:recordFavourite.favourite})
   }
 }

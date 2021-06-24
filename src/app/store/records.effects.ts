@@ -24,15 +24,34 @@ export class RecordsEffect {
     )
   );
 
-  voteEffect$ = createEffect(()=>    
-  this.actions$.pipe(
-    ofType(RecordActions.vote),
-    mergeMap((action) =>
-      this.recordService.voteForRecord({id:action.recordID, votes:action.voteOutcome}).pipe(
-        map((record) => RecordActions.voteForRecordSuccess( record )),
-        catchError(() => of({ type: 'load error' }))
+  voteEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RecordActions.vote),
+      mergeMap((action) =>
+        this.recordService
+          .voteForRecord({ id: action.recordID, votes: action.voteOutcome })
+          .pipe(
+            map((record) => RecordActions.voteForRecordSuccess(record)),
+            catchError(() => of({ type: 'load error' }))
+          )
       )
     )
-  )
-);
+  );
+
+  favouriteChangeEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(RecordActions.favourite),
+      mergeMap((action) =>
+        this.recordService
+          .changeRecordFavourite({
+            id: action.recordID,
+            favourite: action.favouriteState,
+          })
+          .pipe(
+            map((record) => RecordActions.favouriteForRecordSuccess(record)),
+            catchError(() => of({ type: 'change favourite state error' }))
+          )
+      )
+    )
+  );
 }

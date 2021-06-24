@@ -3,16 +3,17 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { Record } from 'src/app/models/record';
+import { RecordFavourite } from 'src/app/models/recordFavourite';
 import { RecordVote } from 'src/app/models/recordVote';
 import { AppState } from 'src/app/store/app.state';
-import { selectAllRecords } from 'src/app/store/records.selectors';
+import { selectAllRecords, sortByFavourites } from 'src/app/store/records.selectors';
 import * as RecordActions from '../../store/records.actions';
 
 @Component({
   selector: 'app-record-list',
   templateUrl: './record-list.component.html',
   styleUrls: ['./record-list.component.css'],
-  changeDetection:ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RecordListComponent implements OnInit {
   constructor(private store: Store<AppState>, private router: Router) {}
@@ -21,12 +22,16 @@ export class RecordListComponent implements OnInit {
   selectedRecord: Observable<Record> = of();
   ngOnInit(): void {
     this.store.dispatch(RecordActions.loadRecords());
-    this.records = this.store.select(selectAllRecords);
+    this.records = this.store.select(sortByFavourites);
   }
 
-  selectRecord(record: Record) {
-    this.store.dispatch(RecordActions.selectRecord({ recordID: record.id }));
-    this.router.navigate(['/songs/'],{queryParams:{recordID:record.id}});
+  selectThisRecord(record: Record) {
+    if (record) {
+      this.store.dispatch(RecordActions.selectRecord({ recordID: record.id }));
+      this.router.navigate(['/songs/'], {
+        queryParams: { recordID: record.id },
+      });
+    }
   }
 
   voteForRecord(recordVote: RecordVote) {
@@ -34,6 +39,14 @@ export class RecordListComponent implements OnInit {
       RecordActions.vote({
         recordID: recordVote.id,
         voteOutcome: recordVote.votes,
+      })
+    );
+  }
+  changeFavouriteState(recordFavourite: RecordFavourite) {
+    this.store.dispatch(
+      RecordActions.favourite({
+        recordID: recordFavourite.id,
+        favouriteState: recordFavourite.favourite,
       })
     );
   }

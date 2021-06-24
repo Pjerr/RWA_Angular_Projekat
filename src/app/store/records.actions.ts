@@ -26,3 +26,13 @@ export const selectRecord = createAction(
     recordID: number;
   }>()
 );
+
+export const favourite = createAction(
+  "Change favourite state for record",
+  props<{
+    recordID:number,
+    favouriteState:string
+  }>()
+)
+
+export const favouriteForRecordSuccess = createAction("Change favourite state success", props<Record>());
